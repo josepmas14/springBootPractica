@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.josep.web.mvc.entity.Alumno;
 import com.josep.web.mvc.service.AlumnoService;
+import com.josep.web.mvc.service.ProyectoService;
 
 @Controller
 public class AlumnoController {
@@ -17,10 +18,19 @@ public class AlumnoController {
 	@Autowired
 	private AlumnoService alumnoService;
 	
+	@Autowired
+	private ProyectoService proyectoService;
+	
 	@GetMapping("/alumnos")
 	public String listarAlumnos(Model modelo) {
 		modelo.addAttribute("lista_alumno", alumnoService.buscarTodos());
 		return "alumno";
+	}
+	
+	@GetMapping({"/proyecto"})
+	public String listarProyectos(Model modelo) {
+		modelo.addAttribute("proyecto", proyectoService.buscarTodos());
+		return "proyectos";
 	}
 	
 	@GetMapping("/alumnos/new")
